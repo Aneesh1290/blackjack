@@ -52,7 +52,6 @@ if st.button("Start New Game"):
     st.session_state.computer_cards = [deal_card(), deal_card()]
     st.session_state.is_game_over = False
     st.session_state.message = ""
-    st.experimental_rerun()
 
 # Display game state
 if st.session_state.user_cards:
@@ -67,12 +66,13 @@ if st.session_state.user_cards:
         st.session_state.is_game_over = True
 
     if not st.session_state.is_game_over:
-        if st.button("Hit Me! (Get another card)"):
-            st.session_state.user_cards.append(deal_card())
-            st.experimental_rerun()
-        if st.button("Pass"):
-            st.session_state.is_game_over = True
-            st.experimental_rerun()
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("Hit Me! (Get another card)"):
+                st.session_state.user_cards.append(deal_card())
+        with col2:
+            if st.button("Pass"):
+                st.session_state.is_game_over = True
 
 # Handle game over
 if st.session_state.is_game_over and not st.session_state.message:
@@ -87,6 +87,8 @@ if st.session_state.is_game_over and not st.session_state.message:
 
 # Display final results
 if st.session_state.message:
+    user_score = calculate_score(st.session_state.user_cards)
+    computer_score = calculate_score(st.session_state.computer_cards)
     st.write(f"Your Final Hand: {st.session_state.user_cards}, Final Score: {user_score}")
     st.write(f"Computer's Final Hand: {st.session_state.computer_cards}, Final Score: {computer_score}")
     st.write(st.session_state.message)
@@ -96,5 +98,3 @@ if st.session_state.message:
         st.session_state.computer_cards = []
         st.session_state.is_game_over = False
         st.session_state.message = ""
-        st.experimental_rerun()
-
