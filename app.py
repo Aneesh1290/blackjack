@@ -36,24 +36,6 @@ def compare(u_score, c_score):
 st.title("Blackjack Game 🃏")
 st.subheader("Try your luck against the computer!")
 
-# Instructions Panel
-with st.expander("Instructions"):
-    st.write("""
-    Welcome to the Blackjack game! Here’s how to play:
-    
-    - **Goal**: Get as close to 21 as possible without going over.
-    - **Gameplay**:
-        1. You and the computer are dealt 2 cards each.
-        2. You can choose to **Hit Me!** (get another card) or **Pass** (end your turn).
-        3. The computer will draw cards until its score is at least 17.
-    - **Winning Rules**:
-        - If your cards total 21 with just 2 cards (Blackjack), you win automatically.
-        - If your score is closer to 21 than the computer’s without going over, you win.
-        - If your score exceeds 21, you lose.
-        - If the computer's score exceeds 21, you win.
-    - Have fun and good luck! 😄
-    """)
-
 # Initialize game state in session_state
 if "user_cards" not in st.session_state:
     st.session_state.user_cards = []
